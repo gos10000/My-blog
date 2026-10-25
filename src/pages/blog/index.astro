@@ -1,0 +1,48 @@
+---
+
+import BaselayoutsAstroComponent, { Baselayouts } from "../../layouts/Baselayouts.astro";
+import { posts } from "../../data/posts";
+
+---
+
+<Baselayouts title="文章列表">
+
+    <h1>文章</h1>
+
+    <div id="tag-filter" class="tag-filter">
+        <button type="button" data-tag="all">全部</button>
+    </div>
+
+    <ul class="post-list" id="post-list">
+        {posts.map(post => (
+            <li class="post-item" data-tags={post.tags.join(',')}>
+                <article>
+                    <h2>
+                        <a href={`${import.meta.env.BASE_URL}blog/${post.slug}/`}>{post.title}</a>
+                    </h2>
+                    <time datetime={post.date}>{post.date}</time>
+                    <p>{post.excerpt}</p>
+                    <ul class="post-tags">
+                        {post.tags.map(tag => (<li>{tag}</li>))}
+                    </ul>
+                </article>
+            </li>
+        ))}
+    </ul>
+    <script>
+        const buttons = document.querySelectorAll<HTMLBaseElement>('#tag-filter button');
+        const items = document.querySelectorAll<HTMLLIElement>('#post-list .post-item')
+        
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tag = btn.dataset.tag
+                if(!tag) return;
+
+                items.forEach(item => {
+                    const tags = item.dataset.tags?.split(',') ?? [];
+                    item.hidden = tag != 'all' && !tags.includes(tag);
+                });
+            });
+        });
+    </script>
+</Baselayouts>
