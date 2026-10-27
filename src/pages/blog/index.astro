@@ -21,7 +21,7 @@ import { posts } from "../../data/posts";
             <li class="post-item" data-tags={post.tags.join(',')}>
                 <article>
                     <h2>
-                        <a href={`${import.meta.env.BASE_URL}blog/${post.slug}/`}>{post.title}</a>
+                        <a href={`${import.meta.env.BASE_URL}/blog/${post.slug}/`}>{post.title}</a>
                     </h2>
                     <time datetime={post.date}>{post.date}</time>
                     <p>{post.excerpt}</p>
