@@ -1,0 +1,59 @@
+---
+
+import Baselayouts from "../layouts/Baselayouts.astro";
+
+---
+
+<Baselayouts title="about">
+    <article class="about">
+        <header>
+            <h1>关于</h1>
+        </header>
+
+        <section>
+            <h2>技术栈</h2>
+            <p>这块还没做嘿嘿</p>
+        </section>
+        <section>
+            <h2>我的项目</h2>
+            <p>也还没做这块，嘿嘿</p>
+        </section>
+
+        <section>
+            <h2>联系</h2>
+            <dl>
+                <dt>Github</dt>
+                <dd>gos10000</dd>
+                <dt>email</dt>
+                <dd>ganzixin988@gmail.com</dd>
+            </dl>
+        </section>
+    </article>
+</Baselayouts>
+
+<style>
+    .about {
+        max-width: 42rem;
+        margin: 0 auto;
+    }
+
+    .about header {
+        margin: 5rem;
+    }
+
+    .about section {
+        margin: 2rem;
+    }
+
+    .about h1 {
+        font-size: xx-large;
+    }
+
+    .about h2 {
+        font-size: large;
+    }
+
+    .about p {
+        font-size: medium;
+    }
+</style>
