@@ -52,16 +52,16 @@ import { posts } from "../../data/posts";
 
 </Baselayouts>
 <style>
-        .post-list {
+    .post-list {
     list-style: none;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    gap: 1rem;
+    margin-top: 1rem;
     }
 
     .post-item article{
         border: 1px;
         border-radius: 8px;
-        padding: 1.25rem;
+        padding: 1rem;
     }
 
     .post-item h2 {
@@ -79,6 +79,7 @@ import { posts } from "../../data/posts";
         gap: 0.5rem;
         margin-top: 0.75rem;
         padding: 0;
+        flex-wrap: wrap;
     }
 
     .post-tags li {
@@ -102,5 +103,16 @@ import { posts } from "../../data/posts";
         background: #fff;
         border-radius: 999px;
         font: inherit;
+    }
+
+    @media (min-width: 640px) {
+        .post-list {
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .post-item article{
+            padding: 1.25rem;
+        }
     }
 </style>
