@@ -5,5 +5,82 @@ import Baselayouts from "../layouts/Baselayouts.astro";
 ---
 
 <Baselayouts title="首页">
-    <h1>嘿嘿</h1>
+    <section class="hero prose">
+        <p class="hero-eyebrow">欢迎来到</p>
+        <h1>嘿嘿</h1>
+        <p class="hero-text">
+            这里是无尾熊的博客，随手记录代码、学习与生活里的一些想法。
+        </p>
+        <div class="hero-actions">
+            <a class="button" href={`${import.meta.env.BASE_URL}/blog/`}>看看文章</a>
+            <a class="button button-ghost" href={`${import.meta.env.BASE_URL}/about/`}>关于我</a>
+        </div>
+    </section>
 </Baselayouts>
+
+<style>
+    .hero {
+        max-width: var(--content-width);
+        margin-inline: auto;
+        padding: var(--space-6) 0;
+    }
+
+    .hero-eyebrow {
+        margin-bottom: var(--space-2);
+        font-size: 0.8125rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+    }
+
+    .hero h1 {
+        margin-bottom: var(--space-3);
+    }
+
+    .hero-text {
+        max-width: 34rem;
+        font-size: 1.0625rem;
+        color: var(--color-text-soft);
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3);
+        margin-top: var(--space-5);
+    }
+
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1.2rem;
+        border: 1px solid var(--color-accent);
+        border-radius: var(--radius-pill);
+        background: var(--color-accent);
+        color: var(--color-bg);
+        font-size: 0.9375rem;
+        font-weight: 500;
+        transition: background-color var(--transition), border-color var(--transition),
+            color var(--transition), transform var(--transition);
+    }
+
+    .button:hover {
+        background: var(--color-accent-hover);
+        border-color: var(--color-accent-hover);
+        color: var(--color-bg);
+        transform: translateY(-1px);
+    }
+
+    .button-ghost {
+        background: transparent;
+        color: var(--color-accent);
+    }
+
+    .button-ghost:hover {
+        background: var(--color-accent-soft);
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+</style>

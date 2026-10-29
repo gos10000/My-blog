@@ -33,26 +33,48 @@ import Baselayouts from "../layouts/Baselayouts.astro";
 
 <style>
     .about {
-        margin: 0 auto;
+        max-width: var(--content-width);
+        margin-inline: auto;
     }
 
-    .about header {
-        margin: 3rem;
+    .about > header {
+        margin-bottom: var(--space-5);
+        padding-bottom: var(--space-4);
+        border-bottom: 1px solid var(--color-border);
     }
 
     .about section {
-        margin: 1.25rem;
+        margin-top: var(--space-5);
+        padding: var(--space-5);
+        background: var(--color-card-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--color-shadow);
     }
 
-    .about h1 {
-        font-size: xx-large;
-    }
-
-    .about h2 {
-        font-size: large;
+    .about section h2 {
+        margin-bottom: var(--space-3);
+        font-size: 1.15rem;
     }
 
     .about p {
-        font-size: medium;
+        color: var(--color-text-soft);
+    }
+
+    .about dl {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: var(--space-2) var(--space-4);
+        font-size: 0.95rem;
+    }
+
+    .about dt {
+        color: var(--color-muted);
+        font-weight: 500;
+    }
+
+    .about dd {
+        color: var(--color-text);
+        overflow-wrap: anywhere;
     }
 </style>
