@@ -16,7 +16,17 @@ const {title, discription = "无尾熊的博客"} = Astro.props
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="discription" content={discription} />
+        <link rel="alternate" type="application/rss+xml" title="我的博客" href={`${import.meta.env.BASE_URL}rss.xml`} />
         <title>{title}</title>
+        <script is:inline>
+            (function () {
+                const saved = localStorage.getItem('theme');
+                const theme = saved === 'dark' || saved === 'light' 
+                    ? saved 
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.dataset.theme = theme;
+            })()
+        </script>
     </head>
     <body>
         <header>
@@ -24,6 +34,14 @@ const {title, discription = "无尾熊的博客"} = Astro.props
                 <a href="/My-blog/">首页</a>
                 <a href="/My-blog/blog">文章</a>
                 <a href="/My-blog/about">关于</a>
+                <button
+                    id="theme-toggle"
+                    type="button"
+                    aria-label="切换深色模式"
+                    aria-pressed="false"
+                >
+                    <span class="theme-icon">🌙</span>
+                </button>
             </nav>
         </header>
         <main>
@@ -34,3 +52,40 @@ const {title, discription = "无尾熊的博客"} = Astro.props
         </footer>
     </body>
 </html>
+
+<script>
+import { string } from "astro:schema";
+
+    const STORAGE_KEY = 'theme';
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle') as HTMLButtonElement | null;
+
+    function getPreferedTheme(): 'light' | 'dark' {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved === 'light' || saved === 'dark') return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme: 'light' | 'dark') {
+        root.dataset.theme = theme;
+        if (toggle) {
+            toggle.setAttribute('aria-pressed', String(theme === 'dark'));
+            const icon = toggle.querySelector('.theme-icon');
+            if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+
+    applyTheme(getPreferedTheme());
+
+    toggle?.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : "dark";
+        localStorage.setItem(STORAGE_KEY, next);
+        applyTheme(next);
+    });
+
+    window.matchMedia('prefers-color-scheme: dark').addEventListener('change', (e) => {
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            applyTheme(e.matches ? 'dark' : 'light')
+        }
+    });
+</script>

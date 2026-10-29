@@ -2,6 +2,10 @@
     --color-text: #1a1a1a
     --color-bg: #ffffff
     --color-accent: #0066cc
+    --color-muted: #666666;
+    --color-border: #e5e5e5;
+    --color-code-bg: #f0f0f0;
+    --color-card-bg: #ffffff;
 }
 
 * {
@@ -55,4 +59,14 @@ header nav {
     h2 {
         font-size: clamp(1rem, 1rem + 0.75vp, 1.75rem);
     }
+}
+
+[data-theme="dark"] {
+    --color-text: #e6e6e6;
+    --color-bg: #121212;
+    --color-accent: #66b3ff;
+    --color-muted: #a0a0a0;
+    --color-border: #2e2e2e;
+    --color-code-bg: #1e1e1e;
+    --color-card-bg: #1a1a1a;
 }
