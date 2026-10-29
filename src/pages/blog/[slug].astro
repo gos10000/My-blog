@@ -73,6 +73,8 @@ const base = import.meta.env.BASE_URL;
 
     .post-body {
         line-height: 1.85;
+        /* 中文长句在代码块里也能正常断行，避免横向滚动条 */
+        overflow-wrap: anywhere;
     }
 
     .post > footer {

@@ -15,8 +15,8 @@ const {title, discription = "无尾熊的博客"} = Astro.props
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="discription" content={discription} />
-        <link rel="alternate" type="application/rss+xml" title="我的博客" href={`${import.meta.env.BASE_URL}rss.xml`} />
+        <meta name="description" content={discription} />
+        <link rel="alternate" type="application/rss+xml" title="我的博客" href={`${import.meta.env.BASE_URL}/rss.xml`} />
         <title>{title}</title>
         <script is:inline>
             (function () {
@@ -32,8 +32,8 @@ const {title, discription = "无尾熊的博客"} = Astro.props
         <header>
             <nav>
                 <a href="/My-blog/">首页</a>
-                <a href="/My-blog/blog">文章</a>
-                <a href="/My-blog/about">关于</a>
+                <a href="/My-blog/blog/">文章</a>
+                <a href="/My-blog/about/">关于</a>
                 <button
                     id="theme-toggle"
                     type="button"
@@ -76,6 +76,10 @@ import { string } from "astro:schema";
     }
 
     applyTheme(getPreferedTheme());
+
+    // 首屏渲染完成后再启用颜色过渡，避免加载时出现渐变闪烁
+    requestAnimationFrame(() => document.documentElement.classList.add('is-theme-ready'));
+
 
     toggle?.addEventListener('click', () => {
         const next = root.dataset.theme === 'dark' ? 'light' : "dark";

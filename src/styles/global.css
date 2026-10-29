@@ -84,6 +84,22 @@ html {
     scroll-behavior: smooth;
 }
 
+/* 切换亮/暗主题时颜色平滑过渡（不影响暗色模式的判断逻辑） */
+html.is-theme-ready body,
+html.is-theme-ready header,
+html.is-theme-ready header nav a,
+html.is-theme-ready #theme-toggle,
+html.is-theme-ready .card,
+html.is-theme-ready .post-item > article,
+html.is-theme-ready .about section,
+html.is-theme-ready .not-found,
+html.is-theme-ready .post-tags li,
+html.is-theme-ready pre,
+html.is-theme-ready pre span {
+    transition: background-color var(--transition), border-color var(--transition),
+        color var(--transition), box-shadow var(--transition);
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -373,29 +389,78 @@ button {
     color: var(--color-text);
 }
 
+/* --------------------------------------------------------------------------
+   Shiki 代码块
+   markdown.shikiConfig 配置了 light/dark 双主题 + defaultColor: false，
+   所以每个 token 都带有 --shiki-light / --shiki-dark 变量，
+   下面按 [data-theme] 选用其中一套，跟着站点的主题按钮切换。
+   -------------------------------------------------------------------------- */
+
 .post-body pre,
-.prose pre {
-    padding: var(--space-4);
+.prose pre,
+.astro-code {
+    position: relative;
+    margin: 0;
+    padding: var(--space-5) var(--space-4) var(--space-4);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    background: var(--color-code-bg);
+    background: var(--color-code-bg) !important;
     overflow-x: auto;
-    font-size: 0.9rem;
-    line-height: 1.65;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    tab-size: 2;
+}
+
+/* 代码块里每行的文字颜色 */
+.post-body pre span,
+.prose pre span {
+    color: var(--shiki-light) !important;
+    font-style: var(--shiki-light-font-style, normal);
+    font-weight: var(--shiki-light-font-weight, normal);
+    text-decoration: var(--shiki-light-text-decoration, none);
+}
+
+[data-theme="dark"] .post-body pre span,
+[data-theme="dark"] .prose pre span {
+    color: var(--shiki-dark) !important;
+    font-style: var(--shiki-dark-font-style, normal);
+    font-weight: var(--shiki-dark-font-weight, normal);
+    text-decoration: var(--shiki-dark-text-decoration, none);
 }
 
 .post-body pre code,
 .prose pre code {
+    display: block;
     padding: 0;
     background: none;
+    font-family: inherit;
     font-size: inherit;
+    color: inherit;
+    white-space: pre;
 }
+
+.post-body pre .line,
+.prose pre .line {
+    display: block;
+    min-width: max-content;
+}
+
+
 
 .post-body hr,
 .prose hr {
     height: 1px;
     border: 0;
     background: var(--color-border);
+}
+
+/* 段落内的软换行（由 remarkLineBreaks 转成 <br>）之间的行距 */
+.post-body br,
+.prose br {
+    display: block;
+    content: '';
+    margin-top: 0.35em;
 }
 
 .post-body img,

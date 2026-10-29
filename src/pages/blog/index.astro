@@ -14,11 +14,9 @@ const base = import.meta.env.BASE_URL;
 
     <div id="tag-filter" class="tag-filter">
         <button type="button" data-tag="all">全部</button>
-    </div>
-    <div id="tag-filter" class="tag-filter">
         <button type="button" data-tag="test">测试</button>
     </div>
-    
+
     <ul class="post-list" id="post-list">
         {posts.map(post => (
             <li class="post-item" data-tags={post.data.tags.join(',')}>
